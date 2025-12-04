@@ -1,0 +1,21 @@
+1. prompt: що робити, як що при активації venv файл завантажити неможливо, бо такий сценарій вимкнений в системі
+score: 10/10
+comment: повністю допоміг усунити проблему
+
+2. prompt: чому виникає ця помилка при розгортанні веб-сервера
+127.0.0.1:49257 - "GET / HTTP/1.1" 404 Not Found
+score: 8/10
+comment: зрозуміло чому виникає ця помилка, але хотілося б знати всі шляхи її усунення
+
+3. prompt: чому може виникати помилка: failed to build: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+score: 7/10
+comment: вказано не всі випадки появи такої помилки, потрібно докладніше розібратися з системою розміщення файлів у проекті 
+
+4. prompt:failed to build: failed to solve: dockerfile parse error on line 1: FROM requires either one or three arguments
+що це за помилка
+score: ?/10
+comment: відповіді були дані нормальні, але я так і не зрозуміла що було не так поки не створила dockerfile наново
+
+5. prompt:мій Dockerfile знаходиться в (fastapi-project) PS C:\fastapi-project\fastapi-project> dir Каталог: C:\fastapi-project\fastapi-project Mode LastWriteTime Length Name ---- ------------- ------ ---- d----- 03.12.2025 19:30 Include d----- 03.12.2025 19:30 Lib d----- 03.12.2025 20:01 Scripts d----- 03.12.2025 21:16 __pycache__ -a---- 03.12.2025 19:30 71 .gitignore -a---- 04.12.2025 8:15 5 Dockerfile -a---- 03.12.2025 21:16 275 main.py -a---- 03.12.2025 19:30 460 pyvenv.cfg -a---- 03.12.2025 20:32 26 requirements.txt
+score: 9/10
+comment: підказав, що мій dockerfile порожній, тому його потрібно перестворити та впевнитися що він буде не порожнім
