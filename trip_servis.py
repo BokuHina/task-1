@@ -1,15 +1,28 @@
-from typing import List, Optional, Dict
 from trip_repository import TripRepository
+from add_trips import AddTrip
+from trip_model import Trip
 
 class TripServis:
-
     def __init__(self, trip_repository):
         self.trip_repository = trip_repository
+        self._id_counter = 1
 
-    def create_trip(self, trip):
-        trip.seats_taken = 0
+    def create_trip(self, data: AddTrip) -> Trip:
+        trip = Trip(
+            id=self._id_counter,
+            from_city=data.from_city,
+            to_city=data.to_city,
+            departure_time=data.departure_time,
+            seats_total=data.seats_total,
+            seats_taken=0,
+            price=data.price,
+            driver_name=data.driver_name
+        )
+
         self.trip_repository.add(trip)
-        
+        self._id_counter += 1
+        return trip
+
 # додала ще одну функцію для отримання просто за id поїздку
     def get_trip(self, trip_id, from_city = None, to_city = None):
         return self.trip_repository.get_by_id(trip_id)
