@@ -10,6 +10,7 @@ class Trip:
     price: float
     driver_name: str
 
+
 # обробка не правильного задання параметрів для поїздки
     def __post_init__ (self):
         if self.seats_total <=0:
@@ -18,3 +19,12 @@ class Trip:
             raise ValueError
         if self.price <=0:
             raise ValueError
+
+@dataclass
+class AddTrip:
+    from_city: str
+    to_city: str
+    departure_time: str
+    seats_total: int
+    price: float
+    driver_name: str

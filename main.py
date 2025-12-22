@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from add_trips import AddTrip
 from trip_repository import TripRepository
 from trip_servis import TripServis
+from trip_model import AddTrip
 
 trip_repo = TripRepository()
 trip_servis = TripServis(trip_repo)
@@ -26,6 +26,8 @@ trip_servis.create_trip(trip5_data)
 trip_servis.create_trip(trip6_data)
 trip_servis.create_trip(trip7_data)
 trip_servis.create_trip(trip8_data)
+
+trip_servis.book_a_seat(2, 4)
 
 @app.get('/')
 

@@ -1,14 +1,14 @@
 from trip_repository import TripRepository
 from trip_servis import TripServis
-from trip_model import Trip
+from trip_model import AddTrip
             
 
 trip_repo = TripRepository()
 trip_servis = TripServis(trip_repo)
 
-trip1_data = Trip(1, "Київ", "Львів", "10:00", 5, 1, 500.0, "Петро")
-trip2_data = Trip(2, "Одеса", "Харків", "12:30", 30, 0, 800.0, "Іван")
-trip3_data = Trip(3, "Запоріжжя", "Львів", "21:45", 6, 3, 1050.0, "Владислав")
+trip1_data = AddTrip("Київ", "Львів", "10:00", 5, 500.0, "Петро")
+trip2_data = AddTrip("Одеса", "Харків", "12:30", 30, 800.0, "Іван")
+trip3_data = AddTrip("Запоріжжя", "Львів", "21:45", 6, 1050.0, "Владислав")
 
 trip_servis.create_trip(trip1_data)
 
