@@ -10,7 +10,7 @@ trip_repo = SQLiteTripRepository("/app/data/trips.db")
 trip_servis = TripServis(trip_repo)
 
 app = FastAPI()
-
+# як було додано данні у бд
 # trip1_data = AddTrip("Kiyv", "Lviv", "10:00", 15, 500.0, "Petro")
 # trip2_data = AddTrip("Odessa", "Harkiv", "12:00", 30, 800.0, "Sergiy")
 # trip3_data = AddTrip("Odessa", "Kiyv", "14:00", 20, 600.0, "Sidor")
