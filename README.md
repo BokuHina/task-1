@@ -56,3 +56,4 @@ uvicorn main:app --reload
   }
 ]
 ```
+щоб запустити playground потрібно просто запустити файл **playground_sqlite.py** і всі результати перевірок виведуться в консоль
