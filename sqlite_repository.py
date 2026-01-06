@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 import sqlite3
-from typing import List, Optional, Dict
-from unittest import result
+from typing import List, Optional
 from trip_model import AddTrip, Trip
 
 class SQLiteRepository(ABC):
