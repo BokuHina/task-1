@@ -5,7 +5,7 @@ from trip_servis import TripServis
 
 repo = TripRepository()
 repo_sql = SQLiteTripRepository("data/trips.db")
-service = TripServis(repo_sql)
+service = TripServis(repo)
 trip = AddTrip("cityB", "cityC", "11:25", 8, 660.0, "Oleg")
 service.create_trip(trip)
 # перевірка чи створюється бд і таблиця
