@@ -3,13 +3,15 @@ from fastapi.responses import JSONResponse
 from trip_servis import TripServis
 from trip_model import AddTrip, Trip
 from sqlite_repository import SQLiteTripRepository
+from trip_repository import TripRepository
 
-
-trip_repo = SQLiteTripRepository("data/trips.db")
-trip_servis = TripServis(trip_repo)
+trip_repo = TripRepository()
+trip_reposql = SQLiteTripRepository("data/trips.db")
+trip_servis = TripServis(trip_reposql)
 
 app = FastAPI()
 
+# команди наповнення бд
 # trip1_data = AddTrip("Kiyv", "Lviv", "10:00", 15, 500.0, "Petro")
 # trip2_data = AddTrip("Odessa", "Harkiv", "12:00", 30, 800.0, "Sergiy")
 # trip3_data = AddTrip("Odessa", "Kiyv", "14:00", 20, 600.0, "Sidor")

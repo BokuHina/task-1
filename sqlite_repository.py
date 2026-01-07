@@ -3,7 +3,7 @@ import sqlite3
 from typing import List, Optional
 from trip_model import AddTrip, Trip
 
-class SQLiteRepository(ABC):
+class TripRepositoryAbc(ABC):
   
 
     @abstractmethod
@@ -23,7 +23,7 @@ class SQLiteRepository(ABC):
         pass
 
 
-class SQLiteTripRepository(SQLiteRepository):
+class SQLiteTripRepository(TripRepositoryAbc):
     
     def __init__(self, db_path):
         self.db_path = db_path
