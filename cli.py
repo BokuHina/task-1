@@ -12,7 +12,6 @@ parser = argparse.ArgumentParser(description="A simple CLI tool example.")
 subparsers = parser.add_subparsers(dest="command", help="доступні команди")
 
 parser_add = subparsers.add_parser('add', help='Додає новий елемент')
-parser_add.add_argument('-n', '--name', type=str, help='Ім\'я елемента для додавання')
 parser_add.add_argument('-from', '--from_city', type=str, help='Місто відправлення')
 parser_add.add_argument('-to', '--to_city', type=str, help='Місто призначення')
 parser_add.add_argument('-dt', '--departure_time', type=str, help='Час відправлення')
@@ -25,8 +24,8 @@ parser_list = subparsers.add_parser('list-trips', help='Показує спис�
 
 # парсер для команди 'search-trip'
 parser_search = subparsers.add_parser('search-trip', help='Шукає елементи за місцевем відправлення та призначення')
-parser_search.add_argument('--from_city', type=str, default=None, help='Звідки відправляється поїздка')
-parser_search.add_argument('--to_city', type=str, default=None, help='Куди відправляється поїздка')
+parser_search.add_argument('-f','--from_city', type=str, default=None, help='Звідки відправляється поїздка')
+parser_search.add_argument('-t','--to_city', type=str, default=None, help='Куди відправляється поїздка')
 
 # Парсер для команди 'stat'
 parser_stat = subparsers.add_parser('stat', help='Показує статистику елементів')
@@ -53,24 +52,25 @@ if args.command == 'add':
         driver_name=args.driver_name
     )
     service.create_trip(trip)
+    print(f"Поїздка {args.from_city} -> {args.to_city} Час:{args.departure_time}  додана успішно.")
 elif args.command == 'list-trips':
-    print(service.search_trip())
+    service.output_for_cli(service.search_trip())
 elif args.command == 'search-trip':
-    print(service.search_trip(args.from_city, args.to_city))
+    service.output_for_cli(service.search_trip(args.from_city, args.to_city))
 elif args.command == 'stat':
     print(service.stat())
 elif args.command == 'book-seat':
     try:
         service.book_a_seat(args.trip_id, 1)
-        print(f"Місце в поїздці з ID {args.trip_id} успішно заброньовано.")
+        print(f"Місце у поїздці з ID {args.trip_id} успішно заброньовано.")
     except ValueError:
-        print(f"Не вдалося забронювати місце в поїздці з ID {args.trip_id}.")
+        print(f"Не вдалося забронювати місце: в поїздці з ID {args.trip_id} немає вільних місць.")
 elif args.command == 'cancel-book':
     try:
         service.calcel_book(args.trip_id, 1)
         print(f"Бронювання місця в поїздці з ID {args.trip_id} успішно скасовано.")
     except ValueError:
-        print(f"Не вдалося скасувати бронювання місця в поїздці з ID {args.trip_id}.")
+        print(f"Не вдалося скасувати бронювання місця: в поїздці з ID {args.trip_id} немає заброньованих місць.")
 else:   
     parser.print_help()
 

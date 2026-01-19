@@ -6,6 +6,8 @@ from sqlite_repository import TripRepositoryAbc
 
 class TripRepository(TripRepositoryAbc):
 
+    def type(self):
+        print(__name__)
     def __init__(self):
         self._trips: Dict[int, Trip] = {}
 

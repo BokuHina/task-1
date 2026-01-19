@@ -56,4 +56,7 @@ class TripServis:
             seats += trip.seats_total - trip.seats_taken
             count += 1
         return count, seats
-    
+
+    def output_for_cli(self, trips): # метод для виводу інформації в консоль
+        for trip in trips:
+            print(f"[{trip.id}] {trip.from_city} -> {trip.to_city}, час: {trip.departure_time}, вільних місць: {trip.seats_taken}/{trip.seats_total}, ціна: {trip.price}")

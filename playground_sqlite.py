@@ -1,13 +1,10 @@
 from sqlite_repository import SQLiteTripRepository
-from trip_repository import TripRepository
 from trip_model import AddTrip
 from trip_servis import TripServis
 
-repo = TripRepository()
-repo_sql = SQLiteTripRepository("data/trips.db")
+repo = SQLiteTripRepository("data/trips.db")
 service = TripServis(repo)
-trip = AddTrip("cityB", "cityC", "11:25", 8, 660.0, "Oleg")
-service.create_trip(trip)
+
 # перевірка чи створюється бд і таблиця
 print(service.search_trip())
 # перевірка чи зберігається поїздка з попередьої сесії
