@@ -44,7 +44,7 @@ class TripServis:
         trip = self.sqlite_repository.get_by_id(trip_id)
         if trip is None:
             raise ValueError
-        if (trip.seats_taken - seats) < 0 or (trip.seats_taken - seats) == 0:
+        if (trip.seats_taken - seats) < 0 or trip.seats_taken == 0:
             raise ValueError
         trip.seats_taken -= seats
         self.sqlite_repository.update(trip)
