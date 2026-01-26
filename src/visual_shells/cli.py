@@ -1,0 +1,75 @@
+import argparse
+from src.assembly_place.conteiner import build_trip_service
+from src.business_logic.trip_servis import TripServis
+from src.domain_model.trip_model import AddTrip
+
+
+
+service = build_trip_service()
+
+parser = argparse.ArgumentParser(description="A simple CLI tool example.")
+
+subparsers = parser.add_subparsers(dest="command", help="доступні команди")
+
+parser_add = subparsers.add_parser('add', help='Додає новий елемент')
+parser_add.add_argument('-from', '--from_city', type=str, help='Місто відправлення')
+parser_add.add_argument('-to', '--to_city', type=str, help='Місто призначення')
+parser_add.add_argument('-dt', '--departure_time', type=str, help='Час відправлення')
+parser_add.add_argument('-st', '--seats_total', type=int, help='Загальна кількість місць')
+parser_add.add_argument('-p', '--price', type=float, help='Ціна поїздки')
+parser_add.add_argument('-dn', '--driver_name', type=str, help='Ім\'я водія')
+
+# Парсер для команди 'list-trips'
+parser_list = subparsers.add_parser('list-trips', help='Показує список елементів')
+
+# парсер для команди 'search-trip'
+parser_search = subparsers.add_parser('search-trip', help='Шукає елементи за місцевем відправлення та призначення')
+parser_search.add_argument('-f','--from_city', type=str, default=None, help='Звідки відправляється поїздка')
+parser_search.add_argument('-t','--to_city', type=str, default=None, help='Куди відправляється поїздка')
+
+# Парсер для команди 'stat'
+parser_stat = subparsers.add_parser('stat', help='Показує статистику елементів')
+
+#  'book-seat'
+parser_book = subparsers.add_parser('book-seat', help='Бронює місце в поїздці')
+parser_book.add_argument('trip_id', type=int, help='ID поїздки для бронювання місця')
+
+#  'cancel-book'
+parser_cancel = subparsers.add_parser('cancel-book', help='Скасовує бронювання місця в поїздці')
+parser_cancel.add_argument('trip_id', type=int, help='ID поїздки для скасування бронювання місця')
+
+# Зчитуємо аргументи
+args = parser.parse_args()
+
+# Виконуємо логіку
+if args.command == 'add':
+    trip = AddTrip(
+        from_city=args.from_city,
+        to_city=args.to_city,
+        departure_time=args.departure_time,
+        seats_total=args.seats_total,
+        price=args.price,
+        driver_name=args.driver_name
+    )
+    service.create_trip(trip)
+    print(f"Поїздка {args.from_city} -> {args.to_city} Час:{args.departure_time}  додана успішно.")
+elif args.command == 'list-trips':
+    service.output_for_cli(service.search_trip())
+elif args.command == 'search-trip':
+    service.output_for_cli(service.search_trip(args.from_city, args.to_city))
+elif args.command == 'stat':
+    print(service.stat())
+elif args.command == 'book-seat':
+    try:
+        service.book_a_seat(args.trip_id, 1)
+        print(f"Місце у поїздці з ID {args.trip_id} успішно заброньовано.")
+    except ValueError:
+        print(f"Не вдалося забронювати місце: в поїздці з ID {args.trip_id} немає вільних місць.")
+elif args.command == 'cancel-book':
+    try:
+        service.calcel_book(args.trip_id, 1)
+        print(f"Бронювання місця в поїздці з ID {args.trip_id} успішно скасовано.")
+    except ValueError:
+        print(f"Не вдалося скасувати бронювання місця: в поїздці з ID {args.trip_id} немає заброньованих місць.")
+else:   
+    parser.print_help()
